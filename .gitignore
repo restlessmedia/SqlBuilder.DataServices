@@ -5,4 +5,3 @@ SqlBuilder.DataServices.UnitTest/obj/**/*
 .vs/**/*
 packages/**/*
 .DS_Store
-Nuget.Config
