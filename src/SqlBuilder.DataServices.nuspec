@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>SqlBuilder.DataServices</id>
+    <version>1.0.0</version>
+    <title>SqlBuilder.DataServices</title>
+    <authors>Phil Cooper</authors>
+    <owners>Phil Cooper</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Data access services to work with SqlBuilder.</description>
+    <copyright>Copyright restlessmedia 2019</copyright>
+    <tags></tags>
+  </metadata>
+</package>
