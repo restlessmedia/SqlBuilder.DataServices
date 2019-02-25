@@ -7,7 +7,7 @@ namespace SqlBuilder.DataServices
 {
   public class GridReaderWrapper : IGridReader
   {
-    public GridReaderWrapper(IDbConnection connection, string command, dynamic param, CommandType commandType = CommandType.StoredProcedure, int? commandTimeout = null)
+    public GridReaderWrapper(IDbConnection connection, string command, object param, CommandType commandType = CommandType.StoredProcedure, int? commandTimeout = null)
     {
       if (string.IsNullOrEmpty(command))
       {
