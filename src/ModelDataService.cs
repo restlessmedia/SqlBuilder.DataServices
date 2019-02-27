@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SqlBuilder.DataServices
@@ -10,7 +11,7 @@ namespace SqlBuilder.DataServices
     public ModelDataService(IModelDataProvider<TDataModel> provider, IModelFactory<TDataModel, TViewModel> modelFactory)
       : base(provider)
     {
-      ModelFactory = modelFactory;
+      ModelFactory = modelFactory ?? throw new ArgumentNullException(nameof(modelFactory));
     }
 
     /// <summary>
@@ -33,7 +34,7 @@ namespace SqlBuilder.DataServices
 
       if (dataModel != null)
       {
-        return ModelFactory.CreateViewModel(DataProvider.ByKey(key));
+        return ModelFactory.CreateViewModel(dataModel);
       }
 
       return default(TViewModel);

@@ -29,7 +29,7 @@ namespace SqlBuilder.DataServices
 
     public static TimeSpan DefaultInterval = TimeSpan.FromSeconds(1);
 
-    private RetryPolicy<TransientErrorDetectionStrategy> GetPolicy(int retryCount, TimeSpan interval)
+    private static RetryPolicy<TransientErrorDetectionStrategy> GetPolicy(int retryCount, TimeSpan interval)
     {
       FixedInterval strategy = new FixedInterval(retryCount, interval);
       RetryPolicy<TransientErrorDetectionStrategy> policy = new RetryPolicy<TransientErrorDetectionStrategy>(strategy);
