@@ -61,12 +61,14 @@
     <Compile Include="ConnectionFactoryTests.cs" />
     <Compile Include="GridReaderWrapperTests.cs" />
     <Compile Include="IExecuteExtensionsTests.cs" />
+    <Compile Include="ISqlQueryExtensionsTests.cs" />
     <Compile Include="ObjectHelper.cs" />
     <Compile Include="SqlAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlRetryTests.cs" />
     <Compile Include="TransientErrorDetectionStrategyTests.cs" />
     <Compile Include="ModelDataServiceTests.cs" />
+    <Compile Include="ModelDataProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

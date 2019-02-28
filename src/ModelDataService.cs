@@ -27,7 +27,7 @@ namespace SqlBuilder.DataServices
     /// Returns a single model with the given key
     /// </summary>
     /// <param name="key"></param>
-    /// <returns></returns>
+    /// <returns></returns> 
     public new TViewModel ByKey(object key)
     {
       TDataModel dataModel = DataProvider.ByKey(key);

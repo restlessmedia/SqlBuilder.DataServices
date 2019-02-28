@@ -8,6 +8,14 @@ namespace SqlBuilder.DataServices
 {
   public static class ISqlQueryExtensions
   {
+    /// <summary>
+    /// Returns a data page.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="sqlQuery"></param>
+    /// <param name="select"></param>
+    /// <param name="onExecute"></param>
+    /// <returns></returns>
     public static DataPage<T> QueryPage<T>(this ISqlQuery sqlQuery, Select select, Action<IDbConnection> onExecute = null)
     {
       IEnumerable<IEnumerable> enumerable = QueryMultiple<T, int>(sqlQuery, select, onExecute);
@@ -22,11 +30,27 @@ namespace SqlBuilder.DataServices
       return new DataPage<T>(data);
     }
 
+    /// <summary>
+    /// Returns dynamic query.
+    /// </summary>
+    /// <param name="sqlQuery"></param>
+    /// <param name="sqlText"></param>
+    /// <param name="onExecute"></param>
+    /// <returns></returns>
     public static IEnumerable<dynamic> QueryDynamic(this ISqlQuery sqlQuery, SqlText sqlText, Action<IDbConnection> onExecute = null)
     {
       return sqlQuery.Query<dynamic>(sqlText.Sql(), sqlText.Parameters, commandType: CommandType.Text, onExecute: onExecute);
     }
 
+    /// <summary>
+    /// Returns multiple recordsets for the provided types.
+    /// </summary>
+    /// <typeparam name="TFirst"></typeparam>
+    /// <typeparam name="TSecond"></typeparam>
+    /// <param name="sqlQuery"></param>
+    /// <param name="sqlText"></param>
+    /// <param name="onExecute"></param>
+    /// <returns></returns>
     public static IEnumerable<IEnumerable> QueryMultiple<TFirst, TSecond>(this ISqlQuery sqlQuery, SqlText sqlText, Action<IDbConnection> onExecute = null)
     {
       using (IGridReader gridReader = sqlQuery.QueryMultiple(sqlText.Sql(), sqlText.Parameters, commandType: CommandType.Text, onExecute: onExecute))
@@ -36,6 +60,15 @@ namespace SqlBuilder.DataServices
       }
     }
 
+    /// <summary>
+    /// Returns multiple recordsets for the provided types.
+    /// </summary>
+    /// <typeparam name="TFirst"></typeparam>
+    /// <typeparam name="TSecond"></typeparam>
+    /// <typeparam name="TThird"></typeparam>
+    /// <param name="sqlQuery"></param>
+    /// <param name="sqlText"></param>
+    /// <returns></returns>
     public static IEnumerable<IEnumerable> QueryMultiple<TFirst, TSecond, TThird>(this ISqlQuery sqlQuery, SqlText sqlText)
     {
       using (IGridReader gridReader = sqlQuery.QueryMultiple(sqlText.Sql(), sqlText.Parameters, commandType: CommandType.Text))
@@ -47,7 +80,7 @@ namespace SqlBuilder.DataServices
     }
 
     /// <summary>
-    /// Returns multiple datasets from the 
+    /// Returns multiple recordsets for the provided types.
     /// </summary>
     /// <typeparam name="TFirst"></typeparam>
     /// <typeparam name="TSecond"></typeparam>
