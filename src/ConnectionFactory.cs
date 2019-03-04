@@ -16,11 +16,32 @@ namespace SqlBuilder.DataServices
       _connectionString = connectionString;
     }
 
+    public ConnectionFactory(IDbConnection connection)
+    {
+      _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+    }
+
     public virtual IDbConnection CreateConnection(bool open = false)
     {
       try
       {
-        return new SqlConnection(_connectionString);
+        IDbConnection connection;
+
+        if (_connection != null)
+        {
+          connection = _connection;
+        }
+        else
+        {
+          connection = new SqlConnection(_connectionString);
+        }
+
+        if (open && connection.State == ConnectionState.Closed)
+        {
+          connection.Open();
+        }
+
+        return connection;
       }
       catch (Exception e)
       {
@@ -39,5 +60,7 @@ namespace SqlBuilder.DataServices
     }
 
     private readonly string _connectionString;
+
+    private readonly IDbConnection _connection;
   }
 }
