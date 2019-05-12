@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>SqlBuilder.DataServices</id>
-    <version>1.2.0</version>
-    <title>SqlBuilder.DataServices</title>
+    <id>$title$</id>
+    <version>$version$</version>
+    <title>$title$</title>
     <authors>Phil Cooper</authors>
     <owners>Phil Cooper</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
