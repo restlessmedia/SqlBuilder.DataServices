@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SqlBuilder.DataServices
 {
-  public class ModelDataService<TDataModel, TViewModel> : ModelDataService<TDataModel>
+  public class ModelDataService<TDataModel, TViewModel> : ModelDataService<TDataModel>, IModelDataService<TDataModel, TViewModel>
     where TDataModel : DataModel, new()
     where TViewModel : new()
   {
@@ -80,7 +80,7 @@ namespace SqlBuilder.DataServices
     public readonly IModelFactory<TDataModel, TViewModel> ModelFactory;
   }
 
-  public class ModelDataService<TDataModel> : ModelDataService
+  public class ModelDataService<TDataModel> : ModelDataService, IModelDataService<TDataModel>
     where TDataModel : DataModel, new()
   {
     public ModelDataService(IModelDataProvider<TDataModel> dataProvider)

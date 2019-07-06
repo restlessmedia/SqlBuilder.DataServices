@@ -59,6 +59,7 @@
     <Compile Include="IGridReader.cs" />
     <Compile Include="IModelDataProvider.cs" />
     <Compile Include="IModelDataProviderExtensions.cs" />
+    <Compile Include="IModelDataService.cs" />
     <Compile Include="IRetry.cs" />
     <Compile Include="ISqlExecute.cs" />
     <Compile Include="ISqlQuery.cs" />
