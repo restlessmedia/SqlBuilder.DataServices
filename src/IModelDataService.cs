@@ -2,7 +2,7 @@
 
 namespace SqlBuilder.DataServices
 {
-  public interface IModelDataService<TDataModel, TViewModel> : IModelDataService<TDataModel>
+  public interface IModelDataService<TDataModel, TViewModel> : IModelDataService
     where TDataModel : DataModel, new()
     where TViewModel : new()
   {
@@ -17,9 +17,11 @@ namespace SqlBuilder.DataServices
     void Update(object key, TViewModel model);
 
     void UpdateChanged(object key, TViewModel model);
+
+    IModelDataProvider<TDataModel> DataProvider { get; }
   }
 
-  public interface IModelDataService<TDataModel>
+  public interface IModelDataService<TDataModel> : IModelDataService
     where TDataModel : DataModel, new()
   {
     IEnumerable<TDataModel> All();
@@ -28,16 +30,21 @@ namespace SqlBuilder.DataServices
 
     int? Create(TDataModel dataModel);
 
-    ModelDefinition Definition();
-
-    void Delete(object key);
-
-    bool Exists(object key);
-
     IEnumerable<TDataModel> Query(Select select);
 
     void Update(object key, TDataModel dataModel);
 
     void UpdateChanged(object key, TDataModel next);
+
+    IModelDataProvider<TDataModel> DataProvider { get; }
+  }
+
+  public interface IModelDataService
+  {
+    ModelDefinition Definition();
+
+    void Delete(object key);
+
+    bool Exists(object key);
   }
 }

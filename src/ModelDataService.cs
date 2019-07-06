@@ -169,7 +169,7 @@ namespace SqlBuilder.DataServices
       return _definition;
     }
 
-    protected readonly IModelDataProvider<TDataModel> DataProvider;
+    public IModelDataProvider<TDataModel> DataProvider { get; private set; }
 
     private readonly ModelDefinition _definition;
   }
