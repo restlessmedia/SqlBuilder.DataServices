@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dapper
 {
-  public static class DapperExtensions
+  internal static class DapperExtensions
   {
     public static object ToParameters(this object param)
     {

@@ -5,7 +5,7 @@ using System.Data;
 
 namespace SqlBuilder.DataServices
 {
-  public class SqlAccess : ISqlQuery, ISqlExecute
+  internal class SqlAccess : ISqlQuery, ISqlExecute
   {
     public SqlAccess(IConnectionFactory connectionFactory, IRetry sqlRetry)
     {

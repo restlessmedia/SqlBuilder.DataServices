@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AssertExtensions.cs" />
     <Compile Include="ConnectionFactoryTests.cs" />
+    <Compile Include="DataPageTests.cs" />
     <Compile Include="GridReaderWrapperTests.cs" />
     <Compile Include="IExecuteExtensionsTests.cs" />
     <Compile Include="ISqlQueryExtensionsTests.cs" />

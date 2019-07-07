@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace SqlBuilder.DataServices
 {
-  public class ModelDataService<TDataModel, TViewModel> : ModelDataService<TDataModel>, IModelDataService<TDataModel, TViewModel>
+  internal class ModelDataService<TDataModel, TViewModel> : ModelDataService<TDataModel>, IModelDataService<TDataModel, TViewModel>
     where TDataModel : DataModel, new()
     where TViewModel : new()
   {
@@ -27,7 +28,7 @@ namespace SqlBuilder.DataServices
     /// Returns a single model with the given key
     /// </summary>
     /// <param name="key"></param>
-    /// <returns></returns> 
+    /// <returns></returns>
     public new TViewModel ByKey(object key)
     {
       TDataModel dataModel = DataProvider.ByKey(key);
@@ -80,7 +81,7 @@ namespace SqlBuilder.DataServices
     public readonly IModelFactory<TDataModel, TViewModel> ModelFactory;
   }
 
-  public class ModelDataService<TDataModel> : ModelDataService, IModelDataService<TDataModel>
+  internal class ModelDataService<TDataModel> : ModelDataService, IModelDataService<TDataModel>
     where TDataModel : DataModel, new()
   {
     public ModelDataService(IModelDataProvider<TDataModel> dataProvider)
@@ -111,7 +112,7 @@ namespace SqlBuilder.DataServices
     public virtual int? Create(TDataModel dataModel)
     {
       Insert<TDataModel> insert = new Insert<TDataModel>(dataModel, true);
-      return DataProvider.Query<int?>(insert).FirstOrDefault();
+      return DataProvider.Query<int?>(insert, connection => TriggerOnCreate(this, connection)).FirstOrDefault();
     }
 
     /// <summary>
@@ -174,5 +175,13 @@ namespace SqlBuilder.DataServices
     private readonly ModelDefinition _definition;
   }
 
-  public abstract class ModelDataService { }
+  public class ModelDataService
+  {
+    internal static void TriggerOnCreate(object sender, IDbConnection dbConnection)
+    {
+      OnCreate?.Invoke(sender, dbConnection);
+    }
+
+    public static event CreateEventHandler OnCreate;
+  }
 }

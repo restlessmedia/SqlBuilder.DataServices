@@ -8,11 +8,24 @@ namespace SqlBuilder.DataServices
     public DataPage(IEnumerable<T> data, int? count = null)
     {
       Data = data;
-      Count = count ?? data.Count();
+      _count = count;
     }
 
     public readonly IEnumerable<T> Data;
 
-    public readonly int Count;
+    public int Count
+    {
+      get
+      {
+        if (!_count.HasValue && Data != null)
+        {
+          _count = Data.Count();
+        }
+
+        return _count.GetValueOrDefault();
+      }
+    }
+
+    private int? _count;
   }
 }

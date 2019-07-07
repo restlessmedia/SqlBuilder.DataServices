@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="CreateEventHandler.cs" />
     <Compile Include="DapperExtensions.cs" />
     <Compile Include="DataPage.cs" />
     <Compile Include="GridReaderWrapper.cs" />

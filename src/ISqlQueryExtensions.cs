@@ -88,10 +88,11 @@ namespace SqlBuilder.DataServices
     /// <typeparam name="TFourth"></typeparam>
     /// <param name="sqlQuery"></param>
     /// <param name="sqlText"></param>
+    /// <param name="onExecute"></param>
     /// <returns></returns>
-    public static IEnumerable<IEnumerable> QueryMultiple<TFirst, TSecond, TThird, TFourth>(this ISqlQuery sqlQuery, SqlText sqlText)
+    public static IEnumerable<IEnumerable> QueryMultiple<TFirst, TSecond, TThird, TFourth>(this ISqlQuery sqlQuery, SqlText sqlText, Action<IDbConnection> onExecute = null)
     {
-      using (IGridReader gridReader = sqlQuery.QueryMultiple(sqlText.Sql(), sqlText.Parameters, commandType: CommandType.Text))
+      using (IGridReader gridReader = sqlQuery.QueryMultiple(sqlText.Sql(), sqlText.Parameters, CommandType.Text, onExecute: onExecute))
       {
         yield return gridReader.Read<TFirst>();
         yield return gridReader.Read<TSecond>();
@@ -106,8 +107,9 @@ namespace SqlBuilder.DataServices
     /// <typeparam name="T"></typeparam>
     /// <param name="sqlQuery"></param>
     /// <param name="sqlText"></param>
+    /// <param name="onExecute"></param>
     /// <returns></returns>
-    public static IEnumerable<T> Query<T>(this ISqlQuery sqlQuery, SqlText sqlText)
+    public static IEnumerable<T> Query<T>(this ISqlQuery sqlQuery, SqlText sqlText, Action<IDbConnection> onExecute = null)
     {
       string sql = sqlText.Sql();
 
@@ -116,7 +118,7 @@ namespace SqlBuilder.DataServices
         return Enumerable.Empty<T>();
       }
 
-      return sqlQuery.Query<T>(sql, sqlText.Parameters, commandType: CommandType.Text);
+      return sqlQuery.Query<T>(sql, sqlText.Parameters, CommandType.Text, onExecute);
     }
 
     /// <summary>
