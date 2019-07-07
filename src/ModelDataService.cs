@@ -182,6 +182,14 @@ namespace SqlBuilder.DataServices
       OnCreate?.Invoke(sender, dbConnection);
     }
 
+    public static void ClearAllEvents()
+    {
+      if (OnCreate != null)
+      {
+        OnCreate = null;
+      }
+    }
+
     public static event CreateEventHandler OnCreate;
   }
 }
