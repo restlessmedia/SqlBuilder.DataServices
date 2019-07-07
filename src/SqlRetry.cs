@@ -3,7 +3,7 @@ using System;
 
 namespace SqlBuilder.DataServices
 {
-  internal class SqlRetry : IRetry
+  public class SqlRetry : IRetry
   {
     public T Retry<T>(Func<T> action)
     {

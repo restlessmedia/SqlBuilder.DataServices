@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SqlBuilder.DataServices
 {
-  internal class ModelDataProvider<TDataModel> : SqlAccess, IModelDataProvider<TDataModel>
+  public class ModelDataProvider<TDataModel> : SqlAccess, IModelDataProvider<TDataModel>
     where TDataModel : DataModel, new()
   {
     public ModelDataProvider(IConnectionFactory connectionFactory)
