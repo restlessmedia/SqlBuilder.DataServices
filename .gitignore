@@ -1,7 +1,5 @@
-src/bin/**/*
-src/obj/**/*
-SqlBuilder.DataServices.UnitTest/bin/**/*
-SqlBuilder.DataServices.UnitTest/obj/**/*
+*/bin/**/*
+*/obj/**/*
 .vs/**/*
 packages/**/*
 .DS_Store
