@@ -18,7 +18,11 @@ namespace SqlBuilder.DataServices
 
     public IEnumerable<T> Query<T>(IDbTransaction transaction, string command, object param = null, CommandType commandType = CommandType.StoredProcedure, Action<IDbConnection> onExecute = null)
     {
-      return _sqlRetry.Retry(() => transaction.Connection.Query<T>(command, param.ToParameters(), transaction, commandType: commandType));
+        return _sqlRetry.Retry(() =>
+        {
+            onExecute(transaction.Connection);
+            return transaction.Connection.Query<T>(command, param.ToParameters(), transaction, commandType: commandType);
+        });
     }
 
     public IEnumerable<T> Query<T>(string command, object param = null, CommandType commandType = CommandType.StoredProcedure, Action<IDbConnection> onExecute = null)
