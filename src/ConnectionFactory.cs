@@ -6,6 +6,11 @@ namespace SqlBuilder.DataServices
 {
   public class ConnectionFactory : IConnectionFactory
   {
+    public ConnectionFactory(Func<IDbConnection> connectionFactory)
+    {
+      _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
+    }
+
     public ConnectionFactory(string connectionString)
     {
       if (string.IsNullOrEmpty(connectionString))
@@ -13,28 +18,14 @@ namespace SqlBuilder.DataServices
         throw new ArgumentNullException(nameof(connectionString));
       }
 
-      _connectionString = connectionString;
-    }
-
-    public ConnectionFactory(IDbConnection connection)
-    {
-      _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+      _connectionFactory = () => new SqlConnection(connectionString);
     }
 
     public virtual IDbConnection CreateConnection(bool open = false)
     {
       try
       {
-        IDbConnection connection;
-
-        if (_connection != null)
-        {
-          connection = _connection;
-        }
-        else
-        {
-          connection = new SqlConnection(_connectionString);
-        }
+        IDbConnection connection = _connectionFactory();
 
         if (open && connection.State == ConnectionState.Closed)
         {
@@ -59,8 +50,6 @@ namespace SqlBuilder.DataServices
       return connection.BeginTransaction();
     }
 
-    private readonly string _connectionString;
-
-    private readonly IDbConnection _connection;
+    private readonly Func<IDbConnection> _connectionFactory;
   }
 }
