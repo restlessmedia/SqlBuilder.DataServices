@@ -42,6 +42,14 @@ namespace SqlBuilder.DataServices.UnitTest
       A.CallTo(() => _connection.Open()).MustNotHaveHappened();
     }
 
+    [TestMethod]
+    public void CreateConnection_opens_connection_by_default()
+    {
+      new ConnectionFactory(_factory).CreateConnection();
+
+      A.CallTo(() => _connection.Open()).MustHaveHappened();
+    }
+
     private readonly IDbConnection _connection;
 
     private readonly Func<IDbConnection> _factory;

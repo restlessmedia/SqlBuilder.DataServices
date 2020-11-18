@@ -21,7 +21,7 @@ namespace SqlBuilder.DataServices
       _connectionFactory = () => new SqlConnection(connectionString);
     }
 
-    public virtual IDbConnection CreateConnection(bool open = false)
+    public virtual IDbConnection CreateConnection(bool open = true)
     {
       try
       {
@@ -40,7 +40,7 @@ namespace SqlBuilder.DataServices
       }
     }
 
-    public virtual IDbTransaction CreateTransaction(bool open = false)
+    public virtual IDbTransaction CreateTransaction(bool open = true)
     {
       return CreateTransaction(CreateConnection(open));
     }
