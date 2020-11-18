@@ -4,10 +4,10 @@ namespace SqlBuilder.DataServices
 {
   public interface IConnectionFactory
   {
-    IDbConnection CreateConnection(bool open = false);
+    IDbConnection CreateConnection(bool open = true);
 
     IDbTransaction CreateTransaction(IDbConnection connection);
 
-    IDbTransaction CreateTransaction(bool open = false);
+    IDbTransaction CreateTransaction(bool open = true);
   }
 }
